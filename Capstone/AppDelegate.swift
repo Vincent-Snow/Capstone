@@ -12,9 +12,35 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let kClientID = "595ff16788c34cb2b9f8252668e55406"
+    let kCallbackURL = "prototypekeyfeature://returnafterlogin"
+    
     var window: UIWindow?
 
-
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if SPTAuth.defaultInstance().canHandleURL(NSURL(string: kCallbackURL)) {
+            
+            SPTAuth.defaultInstance().handleAuthCallbackWithTriggeredAuthURL(url, callback: { (error: NSError!, session: SPTSession!) in
+                if error != nil {
+                    print("Authentication Error")
+                    return
+                }
+                
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+                let sessionData = NSKeyedArchiver.archivedDataWithRootObject(session)
+                
+                userDefaults.setObject(sessionData, forKey: "SpotifySession")
+                
+                userDefaults.synchronize()
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("loginSuccessful", object: nil)
+            })
+        }
+        
+        return false
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         return true

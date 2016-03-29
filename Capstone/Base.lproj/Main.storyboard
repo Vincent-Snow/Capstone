@@ -8,7 +8,6 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -18,16 +17,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHP-5A-uGo">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Login"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHP-5A-uGo">
+                                <rect key="frame" x="143" y="275" width="315" height="50"/>
+                                <state key="normal" image="LoginButton"/>
+                                <connections>
+                                    <action selector="loginButtonTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QQ3-gO-lDx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vHP-5A-uGo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y4B-gN-Q4e"/>
+                            <constraint firstItem="vHP-5A-uGo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gCt-mi-bcW"/>
+                        </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-408" y="305"/>
+            <point key="canvasLocation" x="-822" y="203"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="K4w-se-aKP">
@@ -54,10 +61,13 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Playlists" id="aaL-O2-Qxo"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="dJd-nL-bKK" kind="show" id="39a-KM-alN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9N-mh-blj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="778" y="-405"/>
+            <point key="canvasLocation" x="-306" y="1352"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="93w-w9-4Ua">
@@ -77,7 +87,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1R-3G-qs3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284" y="305"/>
+            <point key="canvasLocation" x="-152" y="195"/>
         </scene>
         <!--Player View Controller-->
         <scene sceneID="8KX-CR-SRB">
@@ -88,14 +98,37 @@
                         <viewControllerLayoutGuide type="bottom" id="K3e-1C-lwy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="53I-ZA-wHi">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cio-IK-ioY">
+                                <rect key="frame" x="256" y="473" width="88" height="30"/>
+                                <state key="normal" title="Play/Pause"/>
+                                <connections>
+                                    <action selector="playPauseButtonTapped:" destination="dJd-nL-bKK" eventType="touchUpInside" id="kod-IZ-0MT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecJ-m6-dOi">
+                                <rect key="frame" x="103" y="473" width="66" height="30"/>
+                                <state key="normal" title="Previous"/>
+                                <connections>
+                                    <action selector="previousTrackButtonTapped:" destination="dJd-nL-bKK" eventType="touchUpInside" id="vBa-WT-c0K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Si8-zs-GtT">
+                                <rect key="frame" x="450" y="473" width="46" height="30"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextTrackButtonTapped:" destination="dJd-nL-bKK" eventType="touchUpInside" id="dnA-IP-og3"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h0-pi-b7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250" y="1112"/>
+            <point key="canvasLocation" x="689" y="211"/>
         </scene>
         <!--Artists-->
         <scene sceneID="u1O-Zn-Wfa">
@@ -122,10 +155,13 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Artists" id="rSd-s5-HpY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="dJd-nL-bKK" kind="show" id="lZF-F3-BSK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rew-qp-SKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1310" y="-258"/>
+            <point key="canvasLocation" x="486" y="1352"/>
         </scene>
         <!--Albums-->
         <scene sceneID="9n8-Jg-Zf1">
@@ -152,10 +188,13 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Albums" id="HAh-bg-VxE"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="dJd-nL-bKK" kind="show" identifier="toPlayerView" id="WOD-Ih-1Ko"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xow-rj-q9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1298" y="488"/>
+            <point key="canvasLocation" x="90" y="1352"/>
         </scene>
         <!--Songs-->
         <scene sceneID="zo5-hg-ona">
@@ -182,10 +221,19 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Songs" id="cvV-Rc-axx"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="dJd-nL-bKK" kind="show" id="uTs-AX-hPi"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5M-jS-iOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151" y="1212"/>
+            <point key="canvasLocation" x="-713" y="1352"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LoginButton" width="270" height="50"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="lZF-F3-BSK"/>
+    </inferredMetricsTieBreakers>
 </document>

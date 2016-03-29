@@ -11,9 +11,9 @@ import Foundation
 class Artist {
     
     var name: String
-    var albums: [Album]
+    var albums: [Album]?
     
-    init(name: String, albums: [Album]) {
+    init(name: String, albums: [Album]? = []) {
         self.name = name
         self.albums = albums
     }
