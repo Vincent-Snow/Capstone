@@ -10,10 +10,17 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
-    let kClientID = "595ff16788c34cb2b9f8252668e55406"
-    let kCallbackURL = "prototypekeyfeature://returnafterlogin"
+    static let kClientID = "595ff16788c34cb2b9f8252668e55406"
+    static let kCallbackURL = "prototypekeyfeature://returnafterlogin"
     
-    //var session:
+    var session: SPTSession? {
+        if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
+            let sessionDataObject = sessionObj as! NSData
+            let session = NSKeyedUnarchiver.unarchiveObjectWithData(sessionDataObject) as? SPTSession
+            return session
+        }
+        return nil
+    }
     var player: SPTAudioStreamingController?
     
     override func viewDidLoad() {
@@ -28,23 +35,26 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func playPauseButtonTapped(sender: AnyObject) {
-        if player == nil {
-            player = SPTAudioStreamingController(clientId: kClientID)
-        }
-        let session = SPTSession(userName: <#T##String!#>, accessToken: <#T##String!#>, expirationTimeInterval: <#T##NSTimeInterval#>)
-        player?.loginWithSession(session, callback: { (error:NSError!) in
-            if error != nil {
-                print("track error")
-                return
-            }
-            SPTRequest.requestItemAtURI(NSURL(string: SongController.mockData()[0].trackURI), withSession: session, callback: {
-                (error: NSError!, track: AnyObject!) -> Void in
-                if error != nil {
-                    
-                }
-            })
-        })
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SongController.playSong), name: "loginSuccessful", object: nil)
         
+        
+//        if player == nil {
+//            player = SPTAudioStreamingController(clientId: kClientID)
+//        }
+   
+//        player?.loginWithSession(session, callback: { (error:NSError!) in
+//            if error != nil {
+//                print("track error")
+//                return
+//            }
+//            SPTRequest.requestItemAtURI(NSURL(string: SongController.mockData()[0].trackURI), withSession: self.session, callback: {
+//                (error: NSError!, track: AnyObject!) -> Void in
+//                if error != nil {
+//                    
+//                }
+//            })
+//        })
+//        
         
         
         
