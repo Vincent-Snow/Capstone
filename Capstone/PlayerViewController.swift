@@ -10,8 +10,8 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
-    static let kClientID = "595ff16788c34cb2b9f8252668e55406"
-    static let kCallbackURL = "prototypekeyfeature://returnafterlogin"
+    static let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
+    static let kCallbackURL = "capstone://returnAfterLogin"
     
     var session: SPTSession? {
         if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
@@ -35,30 +35,9 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func playPauseButtonTapped(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SongController.playSong), name: "loginSuccessful", object: nil)
+        SongController.sharedController.playPauseToggle()
         
-        
-//        if player == nil {
-//            player = SPTAudioStreamingController(clientId: kClientID)
-//        }
-   
-//        player?.loginWithSession(session, callback: { (error:NSError!) in
-//            if error != nil {
-//                print("track error")
-//                return
-//            }
-//            SPTRequest.requestItemAtURI(NSURL(string: SongController.mockData()[0].trackURI), withSession: self.session, callback: {
-//                (error: NSError!, track: AnyObject!) -> Void in
-//                if error != nil {
-//                    
-//                }
-//            })
-//        })
-//        
-        
-        
-        
-        
+      
     }
     
     @IBAction func previousTrackButtonTapped(sender: AnyObject) {

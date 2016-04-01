@@ -29,23 +29,26 @@ class AlbumListTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return AlbumController.sharedAlbumController.mockAlbums().count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("albumCell", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let album = AlbumController.sharedAlbumController.mockAlbums()[indexPath.row]
+        
+        cell.textLabel?.text = album.name
+        cell.detailTextLabel?.text = album.artist.name
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

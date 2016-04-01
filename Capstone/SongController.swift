@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class SongController {
+class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     
-    let kClientID = "595ff16788c34cb2b9f8252668e55406"
-    let kCallbackURL = "prototypekeyfeature://returnafterlogin"
+    let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
+    let kCallbackURL = "capstone://returnAfterLogin"
     
     var session: SPTSession? {
         if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
@@ -23,7 +23,7 @@ class SongController {
         return nil
     }
     var player: SPTAudioStreamingController?
-    
+    var playOptions = SPTPlayOptions()
     static var sharedController = SongController()
     
     
@@ -38,23 +38,76 @@ class SongController {
         return [song1, song2, song3, song4, song5]
     }
     
-  @objc func playSong() {
-        if player == nil {
-            player = SPTAudioStreamingController(clientId: kClientID)
+    //    func playSong() {
+    //        if  let player = player {
+    //            self.player = SPTAudioStreamingController(clientId: kClientID)
+    //            player.loginWithSession(session, callback: { (error:NSError!) in
+    //                if error != nil {
+    //                    print("track error")
+    //                    return
+    //                }
+    //                if let uri = NSURL(string: "spotify:track:23oxJmDc1V9uLUSmN2LIvx") {
+    //                    player.playURIs([uri] , fromIndex: 0, callback: { (error: NSError!) in
+    //                        if error != nil {
+    //                            print("Starting playback got error")
+    //                        }
+    //                    })
+    //                }
+    //            })
+    //        }
+    //    }
+    
+    func playPauseToggle() {
+        if player?.isPlaying == nil {
+            startSpotifySongWithID("23oxJmDc1V9uLUSmN2LIvx")
+            print("Nice")
+            
+        } else if player?.isPlaying == true {
+            player?.stop({ (error: NSError!) in
+                print("cool")
+            })
+        } else {
+           print(player?.currentPlaybackPosition)
+          
+            player?.playbackDelegate.audioStreaming!(player, didStartPlayingTrack: NSURL(string: "spotify:track:23oxJmDc1V9uLUSmN2LIvx"))
+          // player?.playURIs([NSURL(string: "spotify:track:23oxJmDc1V9uLUSmN2LIvx")!], withOptions: self.playOptions, callback: nil)
+        print("chill")
         }
-        
-        player?.loginWithSession(session, callback: { (error:NSError!) in
-            if error != nil {
-                print("track error")
-                return
-            }
-            self.player?.playURIs(self.mockData() , fromIndex: 0, callback: { (error: NSError!) in
-                if error != nil {
-                    print("Starting playback got error")
-                }
-          })
-        })
-        
     }
     
+    func startSpotifySongWithID(songID: String) {
+        let spotifyURI = "spotify:track:\(songID)"
+        setupSpotifyPlayer(session!) { (success) in
+            if success {
+                if let localPlayer = self.player {
+                    if let spotifyURL = NSURL(string: spotifyURI) {
+                        localPlayer.playURIs([spotifyURL], withOptions: self.playOptions, callback: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    func setupSpotifyPlayer(session: SPTSession!, completion: (success: Bool) -> Void) {
+        player = SPTAudioStreamingController(clientId: kClientID)
+        if let player = player {
+            player.playbackDelegate = self
+            player.diskCache = SPTDiskCache(capacity: 1024 * 1024 * 64)
+            player.loginWithSession(session, callback: { (error) in
+                if let error = error {
+                    // Awesome error handling
+                    completion(success: false)
+                } else {
+                    completion(success: true)
+                }
+            })
+            
+        }
+    }
+    
+    
+    
+    @objc func audioStreaming(audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: NSURL!) {
+        //
+    }
 }

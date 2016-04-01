@@ -10,8 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
-    let kClientID = "595ff16788c34cb2b9f8252668e55406"
-    let kCallbackURL = "prototypekeyfeature://returnafterlogin"
+    let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
+    let kCallbackURL = "capstone://returnAfterLogin"
 
     override func viewDidLoad() {
         super.viewDidLoad()

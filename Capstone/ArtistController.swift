@@ -10,4 +10,14 @@ import Foundation
 
 class ArtistController {
     
+    static var sharedArtistController = ArtistController()
+    
+    func mockArtists() -> [Artist] {
+        let artist1 = Artist(name: "Sum 41")
+        let artist2 = Artist(name: "Yellowcard")
+        let artist3 = Artist(name: "The Story So Far")
+        
+        return [artist1, artist2, artist3]
+    }
+    
 }

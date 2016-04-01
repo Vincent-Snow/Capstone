@@ -78,9 +78,7 @@
 		C39FF32F1CA9C016007C9FE2 = {
 			isa = PBXGroup;
 			children = (
-				C3878ED51CAB240B00FE6358 /* AVFoundation.framework */,
-				C3878ED31CAB23F300FE6358 /* SystemConfiguration.framework */,
-				C3878ED11CAB23DD00FE6358 /* Spotify.framework */,
+				C3AFBB691CADFEBA00EC2697 /* Frameworks */,
 				C39FF33A1CA9C016007C9FE2 /* Capstone */,
 				C39FF3391CA9C016007C9FE2 /* Products */,
 			);
@@ -145,6 +143,16 @@
 				C39FF3771CA9DF2B007C9FE2 /* SpotifyController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C3AFBB691CADFEBA00EC2697 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3878ED51CAB240B00FE6358 /* AVFoundation.framework */,
+				C3878ED31CAB23F300FE6358 /* SystemConfiguration.framework */,
+				C3878ED11CAB23DD00FE6358 /* Spotify.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
