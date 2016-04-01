@@ -127,7 +127,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cio-IK-ioY">
                                 <rect key="frame" x="116" y="473" width="88" height="30"/>
-                                <state key="normal" title="Play/Pause"/>
+                                <state key="normal" title="Play"/>
                                 <connections>
                                     <action selector="playPauseButtonTapped:" destination="dJd-nL-bKK" eventType="touchUpInside" id="kod-IZ-0MT"/>
                                 </connections>
@@ -157,6 +157,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VaT-3H-JVw"/>
+                    <connections>
+                        <outlet property="playPauseButton" destination="cio-IK-ioY" id="dSR-JE-R6X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h0-pi-b7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

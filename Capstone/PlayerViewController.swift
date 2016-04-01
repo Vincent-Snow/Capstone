@@ -10,6 +10,8 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
+    @IBOutlet weak var playPauseButton: UIButton!
+    
     static let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
     static let kCallbackURL = "capstone://returnAfterLogin"
     
@@ -36,8 +38,12 @@ class PlayerViewController: UIViewController {
     
     @IBAction func playPauseButtonTapped(sender: AnyObject) {
         SongController.sharedController.playPauseToggle()
-        
-      
+        if playPauseButton.titleLabel == "Play" {
+            playPauseButton.setTitle("Pause" , forState: .Normal)
+        }
+        if playPauseButton.titleLabel == "Pause" {
+            playPauseButton.setTitle("Play", forState: .Normal)
+        }
     }
     
     @IBAction func previousTrackButtonTapped(sender: AnyObject) {
@@ -45,9 +51,16 @@ class PlayerViewController: UIViewController {
     }
     
     @IBAction func nextTrackButtonTapped(sender: AnyObject) {
-        
+        SongController.sharedController.audioStreamingDidSkipToNextTrack(player)
     }
     
+    func togglePlayPauseButton() {
+        if player?.isPlaying == nil {
+            playPauseButton.setTitle("Pause", forState: .Normal)
+        } else if player?.isPlaying != nil {
+            playPauseButton.setTitle("Play", forState: .Normal)
+        }
+    }
     /*
      // MARK: - Navigation
      

@@ -57,21 +57,18 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     //        }
     //    }
     
+    
+    
     func playPauseToggle() {
         if player?.isPlaying == nil {
-            startSpotifySongWithID("23oxJmDc1V9uLUSmN2LIvx")
-            print("Nice")
+            startSpotifySongWithID("4KacUpvbA3Mfo05gttTjhN")
             
         } else if player?.isPlaying == true {
-            player?.stop({ (error: NSError!) in
-                print("cool")
-            })
+            player?.setIsPlaying(false, callback: nil)
+            
         } else {
-           print(player?.currentPlaybackPosition)
-          
-            player?.playbackDelegate.audioStreaming!(player, didStartPlayingTrack: NSURL(string: "spotify:track:23oxJmDc1V9uLUSmN2LIvx"))
-          // player?.playURIs([NSURL(string: "spotify:track:23oxJmDc1V9uLUSmN2LIvx")!], withOptions: self.playOptions, callback: nil)
-        print("chill")
+          player?.setIsPlaying(true, callback: nil)
+        
         }
     }
     
@@ -105,6 +102,15 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         }
     }
     
+    func audioStreamingDidSkipToNextTrack(audioStreaming: SPTAudioStreamingController!) {
+        if player == nil {
+            setupSpotifyPlayer(session, completion: { (success) in
+                self.player?.skipNext({ (error) in
+                    print("nice work vince")
+                })
+            })
+        }
+    }
     
     
     @objc func audioStreaming(audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: NSURL!) {
