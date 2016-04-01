@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+protocol updatePlayPauseLabel {
+    
+    func playPauseLabelToggle(isPlaying: Bool)
+    
+}
+
 class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     
     let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
@@ -26,6 +32,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     var playOptions = SPTPlayOptions()
     static var sharedController = SongController()
     
+    var delegate: updatePlayPauseLabel?
     
     
     
@@ -62,13 +69,13 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     func playPauseToggle() {
         if player?.isPlaying == nil {
             startSpotifySongWithID("4KacUpvbA3Mfo05gttTjhN")
-            
+            self.delegate?.playPauseLabelToggle(true)
         } else if player?.isPlaying == true {
             player?.setIsPlaying(false, callback: nil)
-            
+            self.delegate?.playPauseLabelToggle(false)
         } else {
-          player?.setIsPlaying(true, callback: nil)
-        
+            player?.setIsPlaying(true, callback: nil)
+            self.delegate?.playPauseLabelToggle(true)
         }
     }
     

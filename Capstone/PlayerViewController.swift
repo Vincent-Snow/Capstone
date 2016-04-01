@@ -8,7 +8,9 @@
 
 import UIKit
 
-class PlayerViewController: UIViewController {
+
+
+class PlayerViewController: UIViewController, updatePlayPauseLabel {
     
     @IBOutlet weak var playPauseButton: UIButton!
     
@@ -27,8 +29,8 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        SongController.sharedController.delegate = self
+       
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,14 +38,17 @@ class PlayerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func playPauseButtonTapped(sender: AnyObject) {
-        SongController.sharedController.playPauseToggle()
-        if playPauseButton.titleLabel == "Play" {
-            playPauseButton.setTitle("Pause" , forState: .Normal)
-        }
-        if playPauseButton.titleLabel == "Pause" {
+    func playPauseLabelToggle(isPlaying: Bool) {
+        if isPlaying == true {
+            playPauseButton.setTitle("Pause", forState: .Normal)
+        } else {
             playPauseButton.setTitle("Play", forState: .Normal)
         }
+    }
+    
+    @IBAction func playPauseButtonTapped(sender: AnyObject) {
+        SongController.sharedController.playPauseToggle()
+        
     }
     
     @IBAction func previousTrackButtonTapped(sender: AnyObject) {
@@ -54,13 +59,19 @@ class PlayerViewController: UIViewController {
         SongController.sharedController.audioStreamingDidSkipToNextTrack(player)
     }
     
-    func togglePlayPauseButton() {
-        if player?.isPlaying == nil {
-            playPauseButton.setTitle("Pause", forState: .Normal)
-        } else if player?.isPlaying != nil {
-            playPauseButton.setTitle("Play", forState: .Normal)
-        }
-    }
+//    func switchToPlay() {
+//        if player?.isPlaying != nil {
+//            playPauseButton.setTitle("Pause", forState: .Normal)
+//        }
+//    }
+//    
+//    func switchToPause() {
+//        if player?.setIsPlaying(true, callback: nil) == nil {
+//            playPauseButton.setTitle("Play", forState: .Normal)
+//        }
+//        
+    
+
     /*
      // MARK: - Navigation
      
