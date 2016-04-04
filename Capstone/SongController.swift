@@ -13,12 +13,15 @@ protocol updatePlayPauseLabel {
     
     func playPauseLabelToggle(isPlaying: Bool)
     
+    func artistSongAlbumLabelUpdate()
 }
 
 class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     
     let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
     let kCallbackURL = "capstone://returnAfterLogin"
+    
+    var queuedSongs: [Song] = []
     
     var session: SPTSession? {
         if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
@@ -28,13 +31,12 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         }
         return nil
     }
+    
     var player: SPTAudioStreamingController?
     var playOptions = SPTPlayOptions()
     static var sharedController = SongController()
     
     var delegate: updatePlayPauseLabel?
-    
-    
     
     func mockData() -> [Song]{
         let song1 = Song(name: "Fat Lip", playCount: 0, artist: Artist(name: "Sum 41") , album: Album(name: "All Killer, No Filler", artist: Artist(name: "Sum 41")), trackURI: "spotify:track:4KacUpvbA3Mfo05gttTjhN")
@@ -45,48 +47,36 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         return [song1, song2, song3, song4, song5]
     }
     
-    //    func playSong() {
-    //        if  let player = player {
-    //            self.player = SPTAudioStreamingController(clientId: kClientID)
-    //            player.loginWithSession(session, callback: { (error:NSError!) in
-    //                if error != nil {
-    //                    print("track error")
-    //                    return
-    //                }
-    //                if let uri = NSURL(string: "spotify:track:23oxJmDc1V9uLUSmN2LIvx") {
-    //                    player.playURIs([uri] , fromIndex: 0, callback: { (error: NSError!) in
-    //                        if error != nil {
-    //                            print("Starting playback got error")
-    //                        }
-    //                    })
-    //                }
-    //            })
-    //        }
-    //    }
-    
-    
-    
     func playPauseToggle() {
         if player?.isPlaying == nil {
-            startSpotifySongWithID("4KacUpvbA3Mfo05gttTjhN")
+            //startSpotifySongWithID(self.mockData()[0].trackURI)
+            startSpotifySongs()
+            //startSpotifySongWithID("spotify:user:1260449223:playlist:38fJ1O7mxqTsTevRih46yY")
             self.delegate?.playPauseLabelToggle(true)
+            self.delegate?.artistSongAlbumLabelUpdate()
         } else if player?.isPlaying == true {
             player?.setIsPlaying(false, callback: nil)
             self.delegate?.playPauseLabelToggle(false)
-        } else {
+        } else if player?.isPlaying == false {
             player?.setIsPlaying(true, callback: nil)
             self.delegate?.playPauseLabelToggle(true)
         }
     }
     
-    func startSpotifySongWithID(songID: String) {
-        let spotifyURI = "spotify:track:\(songID)"
+    func startSpotifySongs() {
+//        let spotifyURI = songID
         setupSpotifyPlayer(session!) { (success) in
             if success {
                 if let localPlayer = self.player {
-                    if let spotifyURL = NSURL(string: spotifyURI) {
-                        localPlayer.playURIs([spotifyURL], withOptions: self.playOptions, callback: nil)
+                    var songs: [NSURL] = []
+                    for song in self.mockData()
+                    {
+                        let songID = song.trackURI
+                        if let spotifyURL = NSURL(string: songID) {
+                            songs.append(spotifyURL)
+                        }
                     }
+                    localPlayer.playURIs(songs, withOptions: self.playOptions, callback: nil)
                 }
             }
         }
@@ -109,18 +99,33 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         }
     }
     
-    func audioStreamingDidSkipToNextTrack(audioStreaming: SPTAudioStreamingController!) {
-        if player == nil {
-            setupSpotifyPlayer(session, completion: { (success) in
-                self.player?.skipNext({ (error) in
-                    print("nice work vince")
-                })
-            })
-        }
+    func getSongInfoWithURI(trackURI: String) {
+        
     }
     
+    func nextSong() {
+        self.player?.skipNext({ (error) in
+            self.delegate?.playPauseLabelToggle(true)
+            print("sick")
+        })
+        
+    }
     
-    @objc func audioStreaming(audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: NSURL!) {
-        //
+    func previousSong() {
+        self.player?.skipPrevious({ (error) in
+            self.delegate?.playPauseLabelToggle(true)
+            print("nicedude")
+        })
+        
+    }
+
+    func addToQueue(songName: String, playCount: Int, artist: Artist, album: Album, trackURI: String) {
+        let song = Song(name: songName, playCount: playCount, artist: artist, album: album, trackURI: trackURI)
+        self.queuedSongs.append(song)
+    }
+    
+    func clearQueue()
+    {
+        self.queuedSongs = []
     }
 }
