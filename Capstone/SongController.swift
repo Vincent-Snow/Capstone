@@ -12,8 +12,6 @@ import UIKit
 protocol updatePlayPauseLabel {
     
     func playPauseLabelToggle(isPlaying: Bool)
-    
-    func artistSongAlbumLabelUpdate()
 }
 
 class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
@@ -53,7 +51,6 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
             startSpotifySongs()
             //startSpotifySongWithID("spotify:user:1260449223:playlist:38fJ1O7mxqTsTevRih46yY")
             self.delegate?.playPauseLabelToggle(true)
-            self.delegate?.artistSongAlbumLabelUpdate()
         } else if player?.isPlaying == true {
             player?.setIsPlaying(false, callback: nil)
             self.delegate?.playPauseLabelToggle(false)
