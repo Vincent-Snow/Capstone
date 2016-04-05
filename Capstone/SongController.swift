@@ -16,20 +16,9 @@ protocol updatePlayPauseLabel {
 
 class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     
-    let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
-    let kCallbackURL = "capstone://returnAfterLogin"
+    
     
     var queuedSongs: [Song] = []
-    
-    var session: SPTSession? {
-        if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
-            let sessionDataObject = sessionObj as! NSData
-            let session = NSKeyedUnarchiver.unarchiveObjectWithData(sessionDataObject) as? SPTSession
-            return session
-        }
-        return nil
-    }
-    
     var player: SPTAudioStreamingController?
     var playOptions = SPTPlayOptions()
     static var sharedController = SongController()
@@ -61,8 +50,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     }
     
     func startSpotifySongs() {
-//        let spotifyURI = songID
-        setupSpotifyPlayer(session!) { (success) in
+        setupSpotifyPlayer(SpotifyController.session!) { (success) in
             if success {
                 if let localPlayer = self.player {
                     var songs: [NSURL] = []
@@ -80,7 +68,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     }
     
     func setupSpotifyPlayer(session: SPTSession!, completion: (success: Bool) -> Void) {
-        player = SPTAudioStreamingController(clientId: kClientID)
+        player = SPTAudioStreamingController(clientId: SpotifyController.kClientID)
         if let player = player {
             player.playbackDelegate = self
             player.diskCache = SPTDiskCache(capacity: 1024 * 1024 * 64)
@@ -96,11 +84,9 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         }
     }
     
-    func getSongInfoWithURI(trackURI: String) {
-        
-    }
     
     func nextSong() {
+        
         self.player?.skipNext({ (error) in
             self.delegate?.playPauseLabelToggle(true)
             print("sick")
@@ -109,6 +95,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     }
     
     func previousSong() {
+        
         self.player?.skipPrevious({ (error) in
             self.delegate?.playPauseLabelToggle(true)
             print("nicedude")
@@ -117,12 +104,13 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     }
 
     func addToQueue(songName: String, playCount: Int, artist: Artist, album: Album, trackURI: String) {
+        
         let song = Song(name: songName, playCount: playCount, artist: artist, album: album, trackURI: trackURI)
         self.queuedSongs.append(song)
     }
     
-    func clearQueue()
-    {
+    func clearQueue()  {
+        
         self.queuedSongs = []
     }
 }

@@ -16,33 +16,27 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     
-    var player: SPTAudioStreamingController?
     
-    static let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
-    static let kCallbackURL = "capstone://returnAfterLogin"
-    
-    var session: SPTSession? {
-        if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
-            let sessionDataObject = sessionObj as! NSData
-            let session = NSKeyedUnarchiver.unarchiveObjectWithData(sessionDataObject) as? SPTSession
-            return session
-        }
-        return nil
-    }
-    //var player: SPTAudioStreamingController?
+   
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let playImage = UIImage(named: "Play")?.imageWithRenderingMode(.AlwaysOriginal)
+        playPauseButton.setImage(playImage, forState: .Normal)
+        PlaylistController.sharedPlaylistController.fetchPlaylists()
+        
         SongController.sharedController.delegate = self
         
-        self.player?.delegate = self
-        self.player?.playbackDelegate = self
-        SongController.sharedController.player = self.player
+        SpotifyController.player?.delegate = self
+        SpotifyController.player?.playbackDelegate = self
+        SongController.sharedController.player = SpotifyController.player
         
         SpotifyController.getTrackInfoFromTrackURI("2lbAU3IQytWjl9b0LLuztk", completion: { (song) in
             if let song = song
             {
                 dispatch_async(dispatch_get_main_queue(), { 
+                   
                     self.artistSongAlbumLabelUpdate(song)
                 })
             }
@@ -54,17 +48,20 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     func playPauseLabelToggle(isPlaying: Bool) {
+    
         if isPlaying == true {
-            playPauseButton.setTitle("Pause", forState: .Normal)
+            let pauseImage = UIImage(named: "Pause")?.imageWithRenderingMode(.AlwaysOriginal)
+            playPauseButton.setImage(pauseImage, forState: .Normal)
         } else {
-            playPauseButton.setTitle("Play", forState: .Normal)
+            let playImage = UIImage(named: "Play")?.imageWithRenderingMode(.AlwaysOriginal)
+            playPauseButton.setImage(playImage, forState: .Normal)
         }
     }
     
     func artistSongAlbumLabelUpdate(song: Song) {
-        //        artistNameLabel.text = SongController.sharedController.mockData()[0].artist.name
-        //        songNameLabel.text = SongController.sharedController.mockData()[0].name
         artistNameLabel.text = song.artist.name
         songNameLabel.text = song.name
     }
@@ -76,17 +73,14 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
     
     @IBAction func previousTrackButtonTapped(sender: AnyObject) {
         SongController.sharedController.previousSong()
-        player?.currentTrackURI
+        SpotifyController.player?.currentTrackURI
     }
     
     @IBAction func nextTrackButtonTapped(sender: AnyObject) {
         SongController.sharedController.nextSong()
     }
     
-    @IBAction func addToQueueTapped(sender: UIButton) {
-        sender.hidden = true
-        //SongController.sharedController.addToQueue()
-    }
+  
     
     func audioStreamingDidSkipToNextTrack(audioStreaming: SPTAudioStreamingController!) {
         print("Did go to next")
@@ -97,17 +91,7 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
         print("Did go to previous")
     }
     
-    //    func switchToPlay() {
-    //        if player?.isPlaying != nil {
-    //            playPauseButton.setTitle("Pause", forState: .Normal)
-    //        }
-    //    }
-    //
-    //    func switchToPause() {
-    //        if player?.setIsPlaying(true, callback: nil) == nil {
-    //            playPauseButton.setTitle("Play", forState: .Normal)
-    //        }
-    //
+
     
     
     /*

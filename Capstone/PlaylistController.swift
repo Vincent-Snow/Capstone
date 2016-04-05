@@ -20,4 +20,11 @@ class PlaylistController {
         
         return [playlist1, playlist2, playlist3]
     }
+    
+    func fetchPlaylists() {
+        SPTPlaylistList.playlistsForUserWithSession(SpotifyController.session) { (error, nil) in
+            
+        }
+    }
+   
 }

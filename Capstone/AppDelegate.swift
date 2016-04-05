@@ -12,13 +12,11 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
-    let kCallbackURL = "capstone://returnAfterLogin"
-    
+
     var window: UIWindow?
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        if SPTAuth.defaultInstance().canHandleURL(NSURL(string: kCallbackURL)) {
+        if SPTAuth.defaultInstance().canHandleURL(NSURL(string: SpotifyController.kCallbackURL)) {
             
             SPTAuth.defaultInstance().handleAuthCallbackWithTriggeredAuthURL(url, callback: { (error: NSError!, session: SPTSession!) in
                 if error != nil {

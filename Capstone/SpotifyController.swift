@@ -10,6 +10,21 @@ import Foundation
 
 class SpotifyController {
     
+    static var session: SPTSession? {
+        if let sessionObj: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("SpotifySession") {
+            let sessionDataObject = sessionObj as! NSData
+            let session = NSKeyedUnarchiver.unarchiveObjectWithData(sessionDataObject) as? SPTSession
+            return session
+        }
+        return nil
+    }
+    
+    static var player: SPTAudioStreamingController?
+    
+    static let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
+    static let kCallbackURL = "capstone://returnAfterLogin"
+    
+    
     static func getTrackInfoFromTrackURI(trackURI: String, completion: (song: Song?) -> Void) {
         if let url = NetworkController.spotifyURL(trackURI) {
             NetworkController.dataAtURL(url, completion: { (data) in

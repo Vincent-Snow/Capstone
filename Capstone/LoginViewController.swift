@@ -10,8 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
-    let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
-    let kCallbackURL = "capstone://returnAfterLogin"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +25,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTaped(sender: AnyObject) {
         let SPTAuthDefault = SPTAuth.defaultInstance()
-        SPTAuthDefault.clientID = kClientID
-        SPTAuthDefault.redirectURL = NSURL(string: kCallbackURL)
+        SPTAuthDefault.clientID = SpotifyController.kClientID
+        SPTAuthDefault.redirectURL = NSURL(string: SpotifyController.kCallbackURL)
         SPTAuthDefault.requestedScopes = [SPTAuthStreamingScope]
         let auth = SPTAuthDefault.loginURL
         UIApplication.sharedApplication().openURL(auth)
