@@ -14,6 +14,10 @@ protocol updatePlayPauseLabel {
     func playPauseLabelToggle(isPlaying: Bool)
 }
 
+protocol updateAlbumArt {
+    func loadAlbumArt()
+}
+
 class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     
     
@@ -23,6 +27,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     var playOptions = SPTPlayOptions()
     static var sharedController = SongController()
     
+    var otherDelegate: updateAlbumArt?
     var delegate: updatePlayPauseLabel?
     
     func mockData() -> [Song]{
@@ -61,7 +66,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
                             songs.append(spotifyURL)
                         }
                     }
-                    localPlayer.playURIs(songs, withOptions: self.playOptions, callback: nil)
+                   localPlayer.playURIs(songs, withOptions: self.playOptions, callback: nil)
                 }
             }
         }
@@ -84,6 +89,9 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         }
     }
     
+    func updateUI() {
+        
+    }
     
     func nextSong() {
         

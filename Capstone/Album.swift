@@ -11,7 +11,7 @@ import Foundation
 class Album {
     
     var name: String
-   var artist: Artist
+    var artist: Artist
     
     init(name: String, artist: Artist) {
     self.name = name

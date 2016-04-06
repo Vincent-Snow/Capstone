@@ -15,12 +15,12 @@ class Song {
     var playCount: Int
     var artist: Artist
     var album: Album
-    var albumArtwork: String?
-    var songURL: String?
+    var albumArtwork: UIImage?
+    var songURL: NSURL?
     var imageURL: String?
     var trackURI: String
     
-    init(name: String, playCount: Int, artist: Artist, album: Album, albumArtwork: String? = "", songURL: String? = "", imageURL: String? = "", trackURI: String) {
+    init(name: String, playCount: Int, artist: Artist, album: Album, albumArtwork: UIImage? = nil, songURL: NSURL? = nil, imageURL: String? = "", trackURI: String) {
         self.name = name
         self.playCount = playCount
         self.artist = artist

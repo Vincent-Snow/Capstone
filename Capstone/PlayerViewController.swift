@@ -12,6 +12,7 @@ import UIKit
 
 class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate  {
     
+    @IBOutlet weak var albumArtImage: UIImageView!
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -24,21 +25,23 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
         super.viewDidLoad()
         let playImage = UIImage(named: "Play")?.imageWithRenderingMode(.AlwaysOriginal)
         playPauseButton.setImage(playImage, forState: .Normal)
-        PlaylistController.sharedPlaylistController.fetchPlaylists()
+        
+        songNameLabel.text = "Nothing Playing"
+        artistNameLabel.text = ""
         
         SongController.sharedController.delegate = self
         
         SpotifyController.player?.delegate = self
         SpotifyController.player?.playbackDelegate = self
-        SongController.sharedController.player = SpotifyController.player
         
-        SpotifyController.getTrackInfoFromTrackURI("2lbAU3IQytWjl9b0LLuztk", completion: { (song) in
+        SpotifyController.getTrackInfoFromTrackURI("4KacUpvbA3Mfo05gttTjhN", completion: { (song) in
             if let song = song
             {
                 dispatch_async(dispatch_get_main_queue(), { 
                    
                     self.artistSongAlbumLabelUpdate(song)
                 })
+                
             }
         })
     }
@@ -64,6 +67,15 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
     func artistSongAlbumLabelUpdate(song: Song) {
         artistNameLabel.text = song.artist.name
         songNameLabel.text = song.name
+        
+        if let artwork = song.albumArtwork
+        {
+            albumArtImage.image = artwork
+        }
+        else
+        {
+            //THIS SHOULD BE WHERE YOU SET A DEFAULT "NO IMG" IMAGE
+        }
     }
     
     @IBAction func playPauseButtonTapped(sender: AnyObject) {
