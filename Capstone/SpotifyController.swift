@@ -21,6 +21,7 @@ class SpotifyController: SPTYourMusic {
     
     
     static var playlistSongArray: [Song] = []
+    
     static var player: SPTAudioStreamingController?
     
     static let kClientID = "a8bc39869a324c9b9e5f3f97b3126537"
@@ -80,22 +81,27 @@ class SpotifyController: SPTYourMusic {
     //            }
     //        }
     
-    static func getUsersMusic(completion:(songs: [Song]) -> Void) {
-
+    static func getUsersMusic(completion:(songs: [Song]?) -> Void) {
+        
+        var allUsersSongs: [Song] = []
+        
         if let token = session?.accessToken {
             savedTracksForUserWithAccessToken(token) { (error, list) in
                 if let list = list as? SPTListPage,
                      items = list.items {
                     for song in items {
                         guard let song = song as? SPTPartialTrack,
-                        artist = song.artists as? SPTArtist,
+                        artists = song.artists as? [SPTArtist],
                         album = song.album as? SPTAlbum else {return}
-                        
+                        let artist = artists[0]
+                        let newSong = Song(name: song.name, artist: Artist(name: artist.name), album: Album(name: album.name), trackURI: song.uri)
+                        allUsersSongs.append(newSong)
                     }
-                    let song = items[0] as? SPTPartialTrack
-                    print(song!.artists)
+                    completion(songs: allUsersSongs)
                 }
+                completion(songs: nil)
             }
+            completion(songs: nil)
         }
         
     }
@@ -111,7 +117,7 @@ class SpotifyController: SPTYourMusic {
                         guard let albumDict = jsonDict["album"] as? [String: AnyObject],
                             albumArtworkDict = jsonDict["album"] as? [String: AnyObject],
                             artistArray = jsonDict["artists"] as? [[String: AnyObject]],
-                            songName = jsonDict["name"] as? String ,
+                            songName = jsonDict["name"] as? String,
                             trackID = jsonDict["id"] as? String else {
                                 completion(song: nil)
                                 return
@@ -131,10 +137,10 @@ class SpotifyController: SPTYourMusic {
                                     albumArtwork = SpotifyController.getImageForUrl(NSURL(string: imageURLString)!)
                                 }
                             }
+                            let trackURI = NSURL(string: trackID)
+                            let album = Album(name: albumDict["name"] as! String)
                             
-                            let album = Album(name: albumDict["name"] as! String, artist: artist)
-                            
-                            let song = Song(name: songName, playCount: 0, artist: artist, album: album, albumArtwork: albumArtwork, songURL: url, imageURL: imageURL, trackURI: trackID)
+                            let song = Song(name: songName, playCount: 0, artist: artist, album: album, albumArtwork: albumArtwork, songURL: url, imageURL: imageURL, trackURI: trackURI!)
                             
                             print(jsonDict)
                             print(song)

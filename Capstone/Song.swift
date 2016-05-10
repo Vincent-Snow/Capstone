@@ -18,9 +18,9 @@ class Song {
     var albumArtwork: UIImage?
     var songURL: NSURL?
     var imageURL: String?
-    var trackURI: String
+    var trackURI: NSURL
     
-    init(name: String, playCount: Int = 0, artist: Artist, album: Album, albumArtwork: UIImage? = nil, songURL: NSURL? = nil, imageURL: String? = "", trackURI: String) {
+    init(name: String, playCount: Int = 0, artist: Artist, album: Album, albumArtwork: UIImage? = nil, songURL: NSURL? = nil, imageURL: String? = "", trackURI: NSURL) {
         self.name = name
         self.playCount = playCount
         self.artist = artist
