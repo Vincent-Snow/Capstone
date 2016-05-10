@@ -10,11 +10,11 @@ import Foundation
 
 class Playlist {
     
-    var songs: [Song]
+    var uri: NSURL?
     var name: String
     
-    init(songs: [Song], name: String) {
-        self.songs = songs
+    init(uri: NSURL?, name: String) {
+        self.uri = uri
         self.name = name
     }
 }

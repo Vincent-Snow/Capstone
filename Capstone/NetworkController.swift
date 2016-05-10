@@ -34,4 +34,20 @@ class NetworkController {
         }
         dataTask.resume()
     }
+    
+    static func dataFromRequest(request: NSURLRequest, completion: (data: NSData?) -> Void) {
+        let dataRequest = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, _, error) in
+            if let error = error {
+                print("Data could not be retrieved due to error: \(error.localizedDescription)")
+                completion(data: nil)
+            } else {
+                if let data = data {
+                    completion(data: data)
+                } else {
+                    completion(data: nil)
+                }
+            }
+        }
+        dataRequest.resume()
+    }
 }

@@ -44,7 +44,7 @@ class SongListTableViewController: UITableViewController {
         let song = SongController.sharedController.mockData()[indexPath.row]
         
         cell.textLabel?.text = song.name
-        cell.detailTextLabel?.text = song.artist.name
+        cell.detailTextLabel?.text = song.artist!.name
 
         return cell
     }

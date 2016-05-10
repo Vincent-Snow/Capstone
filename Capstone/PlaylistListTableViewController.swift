@@ -46,7 +46,7 @@ class PlaylistListTableViewController: UITableViewController {
         let playlist = PlaylistController.sharedPlaylistController.mockPlaylists()[indexPath.row]
         
         cell.textLabel?.text = playlist.name
-        cell.detailTextLabel?.text = playlist.songs[0].name
+        //cell.detailTextLabel?.text = playlist.songs[0].name
 
         return cell
     }

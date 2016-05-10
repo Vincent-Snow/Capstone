@@ -34,16 +34,20 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
         SpotifyController.player?.delegate = self
         SpotifyController.player?.playbackDelegate = self
         
-        SpotifyController.getTrackInfoFromTrackURI("4KacUpvbA3Mfo05gttTjhN", completion: { (song) in
-            if let song = song
-            {
-                dispatch_async(dispatch_get_main_queue(), { 
-                   
-                    self.artistSongAlbumLabelUpdate(song)
-                })
-                
-            }
-        })
+        SpotifyController.getUsersMusic { (songs) in
+            
+        }
+        
+//        SpotifyController.getTrackInfoFromTrackURI("4KacUpvbA3Mfo05gttTjhN", completion: { (song) in
+//            if let song = song
+//            {
+//                dispatch_async(dispatch_get_main_queue(), { 
+//                   
+//                    self.artistSongAlbumLabelUpdate(song)
+//                })
+//                
+//            }
+//        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,27 +69,37 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
     }
     
     func artistSongAlbumLabelUpdate(song: Song) {
-        artistNameLabel.text = song.artist.name
+        artistNameLabel.text = song.artist!.name
         songNameLabel.text = song.name
+       
         
-        if let artwork = song.albumArtwork
-        {
+        if let artwork = song.albumArtwork {
             albumArtImage.image = artwork
-        }
-        else
-        {
+            
+        } else {
             //THIS SHOULD BE WHERE YOU SET A DEFAULT "NO IMG" IMAGE
+            
         }
     }
     
     @IBAction func playPauseButtonTapped(sender: AnyObject) {
         SongController.sharedController.playPauseToggle()
+                SpotifyController.getTrackInfoFromTrackURI("4KacUpvbA3Mfo05gttTjhN", completion: { (song) in
+                    if let song = song
+                    {
+                        dispatch_async(dispatch_get_main_queue(), {
         
+                            self.artistSongAlbumLabelUpdate(song)
+                        })
+                        
+                    }
+                })
     }
     
     @IBAction func previousTrackButtonTapped(sender: AnyObject) {
         SongController.sharedController.previousSong()
         SpotifyController.player?.currentTrackURI
+        
     }
     
     @IBAction func nextTrackButtonTapped(sender: AnyObject) {

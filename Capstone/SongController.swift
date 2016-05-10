@@ -79,7 +79,7 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
             player.diskCache = SPTDiskCache(capacity: 1024 * 1024 * 64)
             player.loginWithSession(session, callback: { (error) in
                 if let error = error {
-                    // Awesome error handling
+                    print(error.localizedDescription)
                     completion(success: false)
                 } else {
                     completion(success: true)

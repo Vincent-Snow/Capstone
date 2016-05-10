@@ -17,13 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if SPTAuth.defaultInstance().canHandleURL(NSURL(string: SpotifyController.kCallbackURL)) {
-            
-            SPTAuth.defaultInstance().handleAuthCallbackWithTriggeredAuthURL(url, callback: { (error: NSError!, session: SPTSession!) in
+            let auth = SPTAuth.defaultInstance()
+            auth.handleAuthCallbackWithTriggeredAuthURL(url, callback: { (error: NSError!, session: SPTSession!) in
                 if error != nil {
                     print("Authentication Error")
                     return
                 }
-                
+                session.accessToken
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 
                 let sessionData = NSKeyedArchiver.archivedDataWithRootObject(session)
