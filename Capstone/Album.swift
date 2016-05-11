@@ -13,7 +13,7 @@ class Album {
     var name: String
     
     init(name: String) {
-    self.name = name
+        self.name = name
         
     }
 }

@@ -68,18 +68,7 @@ class SpotifyController: SPTYourMusic {
         
         
     }
-    //        if let request =  {
-    //            NetworkController.dataFromRequest(request) { (data) in
-    //                if let data = data {
-    //                    do {
-    //                        let jsonDict = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-    //                        print(jsonDict)
-    //                    } catch let error as NSError {
-    //                        print(error.localizedDescription)
-    //                    }
-    //                }
-    //            }
-    //        }
+    
     
     static func getUsersMusic(completion:(songs: [Song]?) -> Void) {
         
@@ -87,20 +76,31 @@ class SpotifyController: SPTYourMusic {
         
         if let token = session?.accessToken {
             savedTracksForUserWithAccessToken(token) { (error, list) in
-                if let list = list as? SPTListPage,
-                     items = list.items {
-                    for song in items {
-                        guard let song = song as? SPTPartialTrack,
-                        artists = song.artists as? [SPTArtist],
-                        album = song.album as? SPTAlbum else {return}
-                        let artist = artists[0]
-                        let newSong = Song(name: song.name, artist: Artist(name: artist.name), album: Album(name: album.name), trackURI: song.uri)
-                        allUsersSongs.append(newSong)
+                print(list)
+                if error != nil {
+                    completion(songs: nil)
+                    print(error)
+                } else {
+                    if let list = list as? SPTListPage,
+                        items = list.items {
+                        for song in items {
+                            guard let song = song as? SPTPartialTrack,
+                                artists = song.artists as? [SPTPartialArtist],
+                                album = song.album else {
+                                    completion(songs: nil)
+                                    return
+                            }
+                            let artist = artists[0]
+                            let newSong = Song(name: song.name, artist: Artist(name: artist.name), album: Album(name: album.name), trackURI: song.uri)
+                            allUsersSongs.append(newSong)
+                        }
+                        completion(songs: allUsersSongs)
+                    } else {
+                        completion(songs: nil)
                     }
-                    completion(songs: allUsersSongs)
                 }
-                completion(songs: nil)
             }
+        } else {
             completion(songs: nil)
         }
         

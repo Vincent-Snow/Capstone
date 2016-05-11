@@ -15,36 +15,27 @@ class SongListTableViewController: UITableViewController {
         
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-//    override func viewWillAppear(animated: Bool) {
-//        tableView.reloadData()
-//    }
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+       
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return SongController.sharedController.mockData().count
+        
+        return SongController.sharedController.queuedSongs.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("songCell", forIndexPath: indexPath)
 
-        let song = SongController.sharedController.mockData()[indexPath.row]
+        let song = SongController.sharedController.queuedSongs[indexPath.row]
         
         cell.textLabel?.text = song.name
-        cell.detailTextLabel?.text = song.artist!.name
+        cell.detailTextLabel?.text = song.artist.name
 
         return cell
     }

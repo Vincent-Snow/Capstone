@@ -44,7 +44,7 @@ class AlbumListTableViewController: UITableViewController {
         let album = AlbumController.sharedAlbumController.mockAlbums()[indexPath.row]
         
         cell.textLabel?.text = album.name
-        cell.detailTextLabel?.text = album.artist.name
+        //cell.detailTextLabel?.text = album.artist.name
 
         return cell
     }
