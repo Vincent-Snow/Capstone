@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHP-5A-uGo">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHP-5A-uGo">
                                 <rect key="frame" x="165" y="275" width="270" height="50"/>
                                 <state key="normal" image="LoginButton"/>
                                 <connections>
@@ -90,7 +90,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9N-mh-blj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-306" y="1352"/>
+            <point key="canvasLocation" x="-854" y="1360"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="93w-w9-4Ua">
@@ -110,7 +110,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1R-3G-qs3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="406" y="-7"/>
+            <point key="canvasLocation" x="551" y="-7"/>
         </scene>
         <!--Player View Controller-->
         <scene sceneID="8KX-CR-SRB">
@@ -222,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h0-pi-b7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="700"/>
+            <point key="canvasLocation" x="729" y="1360"/>
         </scene>
         <!--Artists-->
         <scene sceneID="u1O-Zn-Wfa">
@@ -265,10 +265,13 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Artists" id="rSd-s5-HpY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="tq4-21-7lg" kind="show" id="CCG-u7-LdC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rew-qp-SKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="1352"/>
+            <point key="canvasLocation" x="-483" y="1360"/>
         </scene>
         <!--Albums-->
         <scene sceneID="9n8-Jg-Zf1">
@@ -321,7 +324,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xow-rj-q9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="1352"/>
+            <point key="canvasLocation" x="-78" y="1360"/>
         </scene>
         <!--Songs-->
         <scene sceneID="zo5-hg-ona">
@@ -383,7 +386,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5M-jS-iOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-709" y="1352"/>
+            <point key="canvasLocation" x="285" y="1360"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="caC-2q-Mil">
@@ -411,5 +414,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Qpm-U6-6ZO"/>
+        <segue reference="CCG-u7-LdC"/>
     </inferredMetricsTieBreakers>
 </document>

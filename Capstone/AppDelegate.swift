@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Authentication Error")
                     return
                 }
-                session.accessToken
+    
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 
                 let sessionData = NSKeyedArchiver.archivedDataWithRootObject(session)
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 userDefaults.synchronize()
                 
-                NSNotificationCenter.defaultCenter().postNotificationName("loginSuccessful", object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("LoginSuccessful", object: nil)
             })
         }
         

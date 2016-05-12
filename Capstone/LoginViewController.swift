@@ -10,12 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
+    var usersSongs: [Song] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getUserMusic), name: "LoginSuccessful", object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,23 +25,16 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTaped(sender: AnyObject) {
-        let SPTAuthDefault = SPTAuth.defaultInstance()
-        SPTAuthDefault.clientID = SpotifyController.kClientID
-        SPTAuthDefault.redirectURL = NSURL(string: SpotifyController.kCallbackURL)
-        SPTAuthDefault.requestedScopes = [SPTAuthStreamingScope, SPTAuthUserLibraryReadScope]
-        let auth = SPTAuthDefault.loginURL
-        UIApplication.sharedApplication().openURL(auth)
+        SpotifyController.authorizeUser { 
+       }
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func getUserMusic() {
+        SpotifyController.getUsersMusic({ (songs) in
+            guard let songs = songs else {return}
+            SongController.sharedController.songs = songs
+        })
     }
-    */
 
 }

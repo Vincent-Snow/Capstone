@@ -10,14 +10,20 @@ import UIKit
 
 class ArtistListTableViewController: UITableViewController {
 
+ 
+    var artists: [Artist] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        for song in SongController.sharedController.songs {
+            self.artists.append(song.artist)
+            self.artists = Array(Set(self.artists))
+        }
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,17 +40,16 @@ class ArtistListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return ArtistController.sharedArtistController.mockArtists().count
+        return artists.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("artistCell", forIndexPath: indexPath)
 
-        let artist = ArtistController.sharedArtistController.mockArtists()[indexPath.row]
+        let artist = artists[indexPath.row]
         
         cell.textLabel?.text = artist.name
-        //cell.detailTextLabel?.text = artist.albums[0]
 
         return cell
     }
@@ -85,14 +90,15 @@ class ArtistListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        
+        
     }
-    */
+    
 
 }

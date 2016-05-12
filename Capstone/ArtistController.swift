@@ -12,6 +12,8 @@ class ArtistController {
     
     static var sharedArtistController = ArtistController()
     
+    var artists: [Artist] = []
+    
     func mockArtists() -> [Artist] {
         let artist1 = Artist(name: "Sum 41")
         let artist2 = Artist(name: "Yellowcard")

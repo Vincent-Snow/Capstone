@@ -44,7 +44,7 @@ class SpotifyController: SPTYourMusic {
             if let playlistList = playlistList as? SPTPlaylistList,
                 playlists = playlistList.items as? [SPTPartialPlaylist] {
                 for playlist in playlists {
-                    let playlist = Playlist(uri: playlist.uri, name: playlist.name)
+                    let _ = Playlist(uri: playlist.uri, name: playlist.name)
                 }
                 
                 print(playlists)
@@ -156,4 +156,19 @@ class SpotifyController: SPTYourMusic {
             })
         }
     }
+    
+    static func authorizeUser(completion:() -> Void) {
+        let SPTAuthDefault = SPTAuth.defaultInstance()
+        SPTAuthDefault.clientID = SpotifyController.kClientID
+        SPTAuthDefault.redirectURL = NSURL(string: SpotifyController.kCallbackURL)
+        SPTAuthDefault.requestedScopes = [SPTAuthStreamingScope, SPTAuthUserLibraryReadScope, SPTAuthUserReadPrivateScope]
+        
+        let auth = SPTAuthDefault.loginURL
+        UIApplication.sharedApplication().openURL(auth)
+        
+        
+        
+    }
+    
+   
 }

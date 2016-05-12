@@ -16,12 +16,13 @@ protocol updatePlayPauseLabel {
 
 class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
     
-    
+    var songs: [Song] = []
     
     var queuedSongs: [Song] = []
     var currentSongURI: String?
     var player: SPTAudioStreamingController?
     var playOptions = SPTPlayOptions()
+    
     static var sharedController = SongController()
     
     

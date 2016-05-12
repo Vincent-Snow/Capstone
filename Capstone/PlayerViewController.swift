@@ -42,7 +42,6 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
                     self.player = player
                     player.queueURIs(songURLs, clearQueue: true, callback: nil)
                     player.setIsPlaying(false, callback: nil)
-//                    SongController.sharedController.playPauseToggle()
                     if let trackURI = songURLs.first {
                         let filteredURI = SongController.filterWordsFromURI(trackURI.absoluteString)
                         SpotifyController.getTrackInfoFromTrackURI(filteredURI, completion: { (song) in
