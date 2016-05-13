@@ -9,7 +9,10 @@
 import UIKit
 
 class SongListTableViewController: UITableViewController {
-
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,7 +20,11 @@ class SongListTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(true)
+//        tableView.reloadData()
+//    }
+//
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
        
         return 1
@@ -25,14 +32,14 @@ class SongListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return SongController.sharedController.queuedSongs.count
+        return SongController.sharedController.songs.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("songCell", forIndexPath: indexPath)
 
-        let song = SongController.sharedController.queuedSongs[indexPath.row]
+        let song = SongController.sharedController.songs[indexPath.row]
         
         cell.textLabel?.text = song.name
         cell.detailTextLabel?.text = song.artist.name
@@ -76,14 +83,24 @@ class SongListTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "playSong" {
+            if let destinationViewController = segue.destinationViewController as? PlayerViewController  {
+                
+                _ = destinationViewController.view
+                let indexPath = tableView.indexPathForSelectedRow
+                if let selectedRow = indexPath?.row {
+                    let song = SongController.sharedController.songs[selectedRow]
+                SongController.sharedController.songs.insert(song, atIndex: 0)
+                    
+                }
+                
+            }
+        }
     }
-    */
+    
 
 }

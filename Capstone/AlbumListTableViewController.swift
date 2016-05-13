@@ -10,14 +10,23 @@ import UIKit
 
 class AlbumListTableViewController: UITableViewController {
 
+    @IBOutlet weak var albumArtistLabel: UINavigationItem!
+    
+    var albums: [Album] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    //    albumArtistLabel.title = albums[0].artist.name
+      
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        for song in SongController.sharedController.songs {
+            self.albums.append(song.album)
+            self.albums = Array(Set(self.albums))
+        }
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,24 +37,23 @@ class AlbumListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return AlbumController.sharedAlbumController.mockAlbums().count
+        return albums.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("albumCell", forIndexPath: indexPath)
 
-        let album = AlbumController.sharedAlbumController.mockAlbums()[indexPath.row]
+        let album = albums[indexPath.row]
         
         cell.textLabel?.text = album.name
-        //cell.detailTextLabel?.text = album.artist.name
-
+        cell.detailTextLabel?.text = album.artist.name
+       // cell.detailTextLabel?.text = "\(album.songs.count) songs"
+        
         return cell
     }
     

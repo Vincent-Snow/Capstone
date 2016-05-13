@@ -91,7 +91,7 @@ class SpotifyController: SPTYourMusic {
                                     return
                             }
                             let artist = artists[0]
-                            let newSong = Song(name: song.name, artist: Artist(name: artist.name), album: Album(name: album.name), trackURI: song.uri)
+                            let newSong = Song(name: song.name, artist: Artist(name: artist.name), album: Album(name: album.name, artist: Artist(name: artist.name)), trackURI: song.uri)
                             allUsersSongs.append(newSong)
                         }
                         completion(songs: allUsersSongs)
@@ -138,7 +138,7 @@ class SpotifyController: SPTYourMusic {
                                 }
                             }
                             let trackURI = NSURL(string: trackID)
-                            let album = Album(name: albumDict["name"] as! String)
+                            let album = Album(name: albumDict["name"] as! String, artist: artist)
                             
                             let song = Song(name: songName, playCount: 0, artist: artist, album: album, albumArtwork: albumArtwork, songURL: url, imageURL: imageURL, trackURI: trackURI!)
                             

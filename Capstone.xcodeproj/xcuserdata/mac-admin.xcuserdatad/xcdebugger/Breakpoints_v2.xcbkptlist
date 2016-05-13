@@ -33,6 +33,38 @@
             endingLineNumber = "43"
             landmarkName = "getUsersPlaylists(_:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Capstone.SpotifyController.getUsersPlaylists ((playlist : Swift.Optional&lt;Swift.Array&lt;__ObjC.SPTPartialPlaylist&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Capstone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/SpotifyController.swift"
+                  timestampString = "484845090.325579"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Capstone.SpotifyController.(getUsersPlaylists ((playlist : Swift.Optional&lt;Swift.Array&lt;__ObjC.SPTPartialPlaylist&gt;&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Capstone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/SpotifyController.swift"
+                  timestampString = "484845090.326334"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,7 +90,7 @@
                   moduleName = "Capstone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/SpotifyController.swift"
-                  timestampString = "484766820.917881"
+                  timestampString = "484845090.328095"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -73,7 +105,7 @@
                   moduleName = "Capstone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/SpotifyController.swift"
-                  timestampString = "484766820.91806"
+                  timestampString = "484845090.328433"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -153,13 +185,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Capstone/LoginViewController.swift"
-            timestampString = "484766540.041571"
+            filePath = "Capstone/AlbumListTableViewController.swift"
+            timestampString = "484782151.748382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "getUserMusic()"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,46 +201,94 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Capstone/LoginViewController.swift"
-            timestampString = "484766540.041571"
+            filePath = "Capstone/ArtistListTableViewController.swift"
+            timestampString = "484843747.498336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "getUserMusic()"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Capstone/ArtistListTableViewController.swift"
+            timestampString = "484843747.498336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Capstone/ArtistListTableViewController.swift"
+            timestampString = "484843747.498336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Capstone.LoginViewController.getUserMusic () -&gt; ()"
+                  symbolName = "Capstone.ArtistListTableViewController.prepareForSegue (__ObjC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
                   moduleName = "Capstone"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/LoginViewController.swift"
-                  timestampString = "484766820.92217"
+                  urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/ArtistListTableViewController.swift"
+                  timestampString = "484845090.338763"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "729">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Capstone.LoginViewController.(getUserMusic () -&gt; ()).(closure #1)"
+                  symbolName = "Capstone.ArtistListTableViewController.prepareForSegue (__ObjC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
                   moduleName = "Capstone"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/LoginViewController.swift"
-                  timestampString = "484766820.922359"
+                  urlString = "file:///Users/mac-admin/Documents/Capstone/Capstone/ArtistListTableViewController.swift"
+                  timestampString = "484845090.339239"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "880">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Capstone/ArtistListTableViewController.swift"
+            timestampString = "484843747.498336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -13,7 +13,6 @@ class Artist: Hashable {
     var name: String
     var albums: [Album]?
     var hashValue: Int {
-        
         return 0
     }
     

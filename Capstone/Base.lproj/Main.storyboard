@@ -256,6 +256,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="tq4-21-7lg" kind="show" identifier="toAlbumList" id="6TL-g2-efj"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -265,9 +268,6 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Artists" id="rSd-s5-HpY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="tq4-21-7lg" kind="show" id="CCG-u7-LdC"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rew-qp-SKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -321,6 +321,9 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Albums" id="HAh-bg-VxE"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="albumArtistLabel" destination="yeJ-3z-1L9" id="HUb-gq-lqE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xow-rj-q9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -372,7 +375,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="dJd-nL-bKK" kind="show" trigger="accessoryAction" id="8zu-XQ-gxw"/>
+                                    <segue destination="dJd-nL-bKK" kind="show" identifier="playSong" trigger="accessoryAction" id="8zu-XQ-gxw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -413,7 +416,7 @@
         <image name="Previous" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qpm-U6-6ZO"/>
-        <segue reference="CCG-u7-LdC"/>
+        <segue reference="8zu-XQ-gxw"/>
+        <segue reference="6TL-g2-efj"/>
     </inferredMetricsTieBreakers>
 </document>

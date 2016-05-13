@@ -21,7 +21,7 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
     
     var currentTrackURI: String?
     var player: SPTAudioStreamingController?
-    
+    var queuedSongs: [Song]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
                 if let player = player, songURLs = queuedSongs {
                     self.player = player
                     player.queueURIs(songURLs, clearQueue: true, callback: nil)
-                    player.setIsPlaying(false, callback: nil)
+                    player.setIsPlaying(true, callback: nil)
                     if let trackURI = songURLs.first {
                         let filteredURI = SongController.filterWordsFromURI(trackURI.absoluteString)
                         SpotifyController.getTrackInfoFromTrackURI(filteredURI, completion: { (song) in
@@ -80,7 +80,7 @@ class PlayerViewController: UIViewController, updatePlayPauseLabel, SPTAudioStre
             
         } else {
             //THIS SHOULD BE WHERE YOU SET A DEFAULT "NO IMG" IMAGE
-            // albumArtImage.image = UIImage(named: "NoImage")
+            albumArtImage.image = UIImage(named: "NoImage")
         }
     }
     

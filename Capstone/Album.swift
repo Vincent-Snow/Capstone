@@ -8,12 +8,21 @@
 
 import Foundation
 
-class Album {
+class Album: Hashable {
     
     var name: String
-    
-    init(name: String) {
-        self.name = name
-        
+    var artist: Artist
+   // var songs: [Song]
+    var hashValue: Int {
+        return 0
     }
+    
+    init(name: String, artist: Artist) {
+        self.name = name
+        self.artist = artist
+  //      self.songs = songs
+    }
+}
+func ==(lhs: Album, rhs: Album) -> Bool {
+    return lhs.name == rhs.name
 }

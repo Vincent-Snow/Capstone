@@ -48,23 +48,33 @@ class SongController: NSObject, SPTAudioStreamingPlaybackDelegate {
         }
     }
     
-    func startSpotifySongs(completion: (success: Bool, queuedSongs: [NSURL]?) -> Void) {
-//        if let localPlayer = self.player {
-            var queuedSongs: [NSURL] = []
-            SpotifyController.getUsersMusic({ (songs) in
-                if let songs = songs {
-                    for song in songs {
-                        let songID = song.trackURI
-                        queuedSongs.append(songID)
-                    }
-                    completion(success: true, queuedSongs: queuedSongs)
-                } else {
-                    completion(success: false, queuedSongs: nil)
-                }
-            })
-//        } else {
-//            completion(success: false, queuedSongs: nil)
-//        }
+    func startSpotifySongs(songs: [Song]?, completion: (success: Bool, queuedSongs: [NSURL]?) -> Void) {
+        //        if let localPlayer = self.player {
+        var queuedSongs: [NSURL] = []
+        if let songs = songs {
+            for song in songs {
+                let songID = song.trackURI
+                queuedSongs.append(songID)
+            }
+            completion(success:  true, queuedSongs: queuedSongs)
+        } else {
+            completion(success: false, queuedSongs: nil)
+        }
+        
+        //            SpotifyController.getUsersMusic({ (songs) in
+        //                if let songs = songs {
+        //                    for song in songs {
+        //                        let songID = song.trackURI
+        //                        queuedSongs.append(songID)
+        //                    }
+        //                    completion(success: true, queuedSongs: queuedSongs)
+        //                } else {
+        //                    completion(success: false, queuedSongs: nil)
+        //                }
+        //            })
+        //        } else {
+        //            completion(success: false, queuedSongs: nil)
+        //        }
     }
     
     //    func fetchUserLibrary() ->
